@@ -19,11 +19,10 @@ module.exports = {
           'Helvetica Neue',
           'sans-serif'
         ],
-        
+        roboto: ['Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        poppins: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif']
       }
     }
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ]
+  plugins: [require('@tailwindcss/forms')]
 }
