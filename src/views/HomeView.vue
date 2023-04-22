@@ -27,7 +27,7 @@
         <p class="mt-4">Explore about bank information via our GPT model</p>
         <div class="mt-8">
           <router-link
-            :to="{ name: 'chat' }"
+            :to="{ name: 'no-chat' }"
             class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
           >
             Get started

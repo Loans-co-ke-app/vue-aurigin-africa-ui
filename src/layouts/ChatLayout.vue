@@ -3,11 +3,11 @@ import Sidebar from '@/components/chats/ChatSidebar.vue'
 </script>
 <template>
   <div>
-    <div class="chat-layout">
-      <div class="chat-layout__sidebar">
+    <div class="flex bg-neutral-800 text-neutral-100">
+      <div class="w-60">
         <sidebar ></sidebar>
       </div>
-      <div class="chat-layout__main">
+      <div class="left-60 p-4 w-full">
         <router-view />
       </div>
     </div>
