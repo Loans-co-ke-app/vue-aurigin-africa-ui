@@ -13,7 +13,7 @@ const chatRouter: RouteRecordRaw = {
 		{
 			path: ':id',
 			name: 'single-chat',
-			component: () => import('@/components/chats/Chat.vue'),
+			component: () => import('@/components/chats/ChatComponent.vue'),
 		},
 	],
 };
