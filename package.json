@@ -7,8 +7,8 @@
     "dev": "vite --port 3000 --host --open",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "lint": "vue-tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx,.vue --ignore-path .gitignore .",
-    "format": "prettier --write ./src && eslint --fix ./src/**/*.{vue,js,ts,json,md}",
+    "lint": "vue-tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore .",
+    "format": "prettier --write ./src && eslint --fix ./src/**/*.{js,ts,json,md}",
     "test": "echo \"No tests yet\""
   },
   "husky": {
