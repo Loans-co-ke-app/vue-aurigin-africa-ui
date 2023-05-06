@@ -1,6 +1,6 @@
-import { createPinia } from 'pinia';
-import { markRaw } from 'vue';
-import router from '@/router';
+import { createPinia } from "pinia";
+import { markRaw } from "vue";
+import router from "@/router";
 
 const piniaPlugin = createPinia();
 
@@ -11,7 +11,7 @@ const piniaPlugin = createPinia();
  * @see https://pinia.esm.dev/guide/usage.html#router-guards
  */
 piniaPlugin.use(({ store }) => {
-	store.router = markRaw(router);
+  store.router = markRaw(router);
 });
 
 export default piniaPlugin;
