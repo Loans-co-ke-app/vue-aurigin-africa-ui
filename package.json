@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 3000 --open --host",
-    "live": "vite --port 3000 --open --host --mode live",
+    "dev": "vite --port 3000 --open --host aurigin-africa-ai",
+    "live": "vite --port 3000 --open --host aurigin-africa-ai --mode live",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
