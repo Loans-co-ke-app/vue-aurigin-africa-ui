@@ -1,14 +1,14 @@
 # AuriginAfrica UI
 
 # Setup
-To run the projext locally make sure you add `auriginAfrica` to your `hosts` file which can be found here 
+To run the projext locally make sure you add `aurigin-africa-ai` to your `hosts` file which can be found here 
 ```sh
 Windows 10 - "C:\Windows\System32\drivers\etc\hosts"
 Linux - "/etc/hosts"
 Mac OS X - "/private/etc/hosts"
 ```
 
-The app runs on custom domain i.e `auriginAfrica:3000` Without this the backend won't receive your requests
+The app runs on custom domain i.e http://aurigin-africa-ai:3000 Without this the backend won't receive your requests
 
 Using `pnpm` and `nodejs`
 
