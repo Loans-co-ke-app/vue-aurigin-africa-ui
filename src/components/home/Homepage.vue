@@ -50,9 +50,9 @@ const connected = ref(false);
         <div class="h-16 w-2 bg-white rounded"></div>
       </div>
       <div>
-        <button class="px-4 py-2 bg-red-600 rounded-md font-bold text-white text-lg">
+        <router-link :to="{name:'chat'}" class="px-4 py-2 bg-red-600 rounded-md font-bold text-white text-lg">
           Try it now
-        </button>
+        </router-link>
       </div>
     </div>
   </main>
