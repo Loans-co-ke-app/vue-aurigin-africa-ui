@@ -13,8 +13,23 @@ const baseRouter: RouteRecordRaw = {
       name: "home",
       component: () =>
         import(/* webpackChunkName: "home" */ "@/components/home/Homepage.vue"),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (authStore.authenticated) {
+          // authStore.logoutUser();
+          console.log("authenticated");
+          console.log(from);
+          const nextRoute = from.query.redirect_next
+            ? (from.query.redirect_next as string)
+            : "chat";
+
+          return next({ name: nextRoute });
+        } else {
+          return next();
+        }
+      },
     },
-   
+
     {
       path: "/login",
       name: "login",
@@ -26,7 +41,6 @@ const baseRouter: RouteRecordRaw = {
           // authStore.logoutUser();
           next({ name: from.name ? from.name : "home" });
         } else {
-          
           next();
         }
       },
