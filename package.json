@@ -7,7 +7,7 @@
     "dev": "vite --port 3000 --open --host aurigin-africa-ai",
     "live": "vite --port 3000 --open --host aurigin-africa-ai --mode live",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 3000 --host aurigin-africa-ai"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
