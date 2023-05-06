@@ -21,7 +21,7 @@ const postQuestion = async () => {
     });
     const data = await response.data;
     
-    console.log(Object.keys(data));
+    // console.log(Object.keys(data));
     chatMessages.value.push(data);
     chatInput.value!.value = "";
   } catch (error) {
@@ -29,17 +29,30 @@ const postQuestion = async () => {
   } finally {
     isLoading.value = false;
   }
+  const chatHistory = ref<HTMLDivElement | null>(null);
+
+  onMounted(() => {
+    chatHistory.value?.scrollIntoView();
+  });
+
+  onBeforeUnmount(() => {
+    chatHistory.value?.scrollIntoView();
+  });
+
+  watch(chatMessages, () => {
+    chatHistory.value?.scrollIntoView();
+  });
 
   // console.log(data);
 };
 </script>
 <template>
-  <main class="min-h-[90vh] relative">
+  <main class="h-[90vh] relative overflow-y-scroll">
     <!-- Chat history -->
-    <div class="absolute top-0 left-0 right-0 bottom-20 overflow-auto">
+    <div class="mt-10 py-4 left-0 right-0 bottom-20">
       <div
         ref="chatHistory"
-        class="flex flex-col flex-grow justify-end h-full px-4 py-2 space-y-2 rounded mb-4"
+        class="flex flex-col p-4 justify-end h-full px-4 py-2 space-y-2 rounded mb-4"
       >
         <!-- Chat item -->
         <div

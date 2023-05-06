@@ -15,7 +15,7 @@ const toggleSidebar = () => {
     "
     class="min-h-screen bg-slate-900 bg-no-repeat bg-cover bg-center bg-blend-overlay flex flex-col justify-center items-center"
   >
-    <div class="container max-w-7xl mx-auto p-4 bg-white min-h-screen">
+    <div class="container max-w-7xl mx-auto p-4  min-h-screen">
       <!-- Sidebar -->
       <chat-sidebar :isOpen="sidebarOpen" @toggleSidebar="toggleSidebar" />
       <!-- header -->
