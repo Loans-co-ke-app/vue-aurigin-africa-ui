@@ -8,7 +8,20 @@ import chatRouter from "./chat.routes";
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [baseRouter, adminRouter, chatRouter],
+  routes: [
+    baseRouter,
+    adminRouter,
+    chatRouter,
+    {
+      // Match any other route
+      path: "/:pathMatch(.*)*",
+      name: "all-not-found",
+      component: () =>
+        import(
+          /* webpackChunkName: "all-not-found" */ "@/components/AllNotFound.vue"
+        ),
+    },
+  ],
 });
 /**
  * Router Guard
@@ -16,6 +29,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const store = useAuthStore();
   const meta = to.meta as AuriginAfricaRouteMetaType;
+  if (meta.requiresAuth && !store.isAuthenticated) {
+    return next({ name: "login", query: { redirect_next: to.fullPath } });
+  }
 
   if (store.isAuthenticated) {
     // // Check if user is active
@@ -32,7 +48,7 @@ router.beforeEach((to, from, next) => {
     //Check route name is forgot password or reset password
     if (to.name === "forgotPassword" || to.name === "resetPassword") {
       console.log("forgotPassword or resetPassword");
-      
+
       if (store.isAuthenticated) {
         store.logoutUser();
         return next(to);

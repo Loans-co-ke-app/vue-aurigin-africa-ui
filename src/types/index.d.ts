@@ -7,7 +7,7 @@ export type SignUpFormPropType = {
   first_name: string;
   last_name: string;
   password: string;
-  email:""
+  email: "";
 };
 
 export type UserType = {
@@ -16,6 +16,14 @@ export type UserType = {
   last_name: string;
   password: string;
   role?: string;
+  email: string;
+};
+
+type AuthUser = {
+  username: string;
+  // first_name: string;
+  // last_name: string;
+  role?: UserStateRoleType;
   email: string;
 };
 
@@ -33,7 +41,7 @@ export type PaginationType<T> = {
 
 export type AuthStateType = {
   loading: boolean;
-  user: UserType | null;
+  user: AuthUser | null;
   authenticated: boolean;
   refreshToken: string | null;
 };
@@ -44,7 +52,11 @@ export type AuriginAfricaRouteMetaType = {
   requiresAuth: boolean;
   roles?: UserStateRoleType[];
 };
-
-
-
-
+export type QuestionAnswerType = {
+  id: number;
+  user_id: number;
+  question: string;
+  context: string;
+  answer: string;
+  ask_count: number;
+};

@@ -84,7 +84,7 @@ const handleSubmit = async (e: Event) => {
   } else {
     try {
       isLoading.value = true;
-      await publicAuriginAfricaRequest.post("/auth/register", formData.value);
+      await publicAuriginAfricaRequest.post("/auth/register/", formData.value);
 
       toast.success("Account created successfully", {
         position: "top-right",
@@ -97,14 +97,14 @@ const handleSubmit = async (e: Event) => {
       }, 2000);
     } catch (error: any) {
       if (error instanceof AxiosError) {
-        const { errors } = error.response!.data as any;
+        const { detail } = error.response!.data as any;
         let msg = "";
-        if (Array.isArray(errors)) {
-          errors.forEach((err: any) => {
-            msg += err !== "" ? err + " " : "";
-          });
-        }
-        toast.error(msg, {
+        // if (Array.isArray(errors)) {
+        //   errors.forEach((err: any) => {
+        //     msg += err !== "" ? err + " " : "";
+        //   });
+        // }
+        toast.error(detail, {
           position: "top-right",
           duration: 5000,
           pauseOnHover: true,

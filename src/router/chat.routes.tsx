@@ -5,6 +5,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 const chatRouter: RouteRecordRaw = {
   path: "/chat",
   name: "chat-base-wrapper",
+  meta: { requiresAuth: true,roles:['admin','guest','user'] } as AuriginAfricaRouteMetaType,
   component: () =>
     import(
       /* webpackChunkName: "chat-base-wrapper" */ "@/layouts/ChatLayout.vue"
@@ -20,7 +21,7 @@ const chatRouter: RouteRecordRaw = {
     },
     {
       // Match any other route
-      path: "/:pathMatch(.*)*",
+      path: "/*",
       name: "not-found",
       component: () =>
         import(

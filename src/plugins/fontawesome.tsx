@@ -17,6 +17,8 @@ import {
   faSearch,
   faShoppingBasket,
   faShoppingCart,
+  faSignOut,
+  faSignOutAlt,
   faHeart as faSolidHeart,
   faSort,
   faStar,
@@ -76,7 +78,7 @@ library.add(
   faRegularHeart,
   faStarRegular,
   faStarHalfRegular,
-  faStar,faEllipsisV
+  faStar,faEllipsisV,faSignOut,faSignOutAlt
 );
 
 export default FontAwesomeIcon;

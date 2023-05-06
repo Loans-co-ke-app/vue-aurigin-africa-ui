@@ -23,6 +23,7 @@ const baseRouter: RouteRecordRaw = {
       beforeEnter: (to, from, next) => {
         const authStore = useAuthStore();
         if (authStore.authenticated) {
+          // authStore.logoutUser();
           next({ name: from.name ? from.name : "home" });
         } else {
           

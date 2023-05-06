@@ -43,11 +43,13 @@ const privateAuriginAfricaRequest = axios.create({
 privateAuriginAfricaRequest.interceptors.request.use(
   async (config) => {
     const token = getCookieToken("tka-369340a21d88d03d9509");
+    // console.log("token: " + JSON.stringify(token));
+    
     if (!token) {
       return Promise.reject(config);
     }
     if (token) {
-      config.headers.Authorization = `Bearer ${token.accessToken}`;
+      config.headers.Authorization = `JWT ${token.accessToken}`;
     }
     return config;
   },
@@ -67,6 +69,8 @@ privateAuriginAfricaRequest.interceptors.response.use(
         return Promise.reject(error);
       }
       const decodedToken = jwtDecode<JwtPayload>(tokenPayload.refreshToken);
+      console.log("decodedToken: " + JSON.stringify(decodedToken));
+      
       const currentTime = new Date().getTime() / 1000;
       if (decodedToken.exp! < currentTime) {
         removeToken("tka-369340a21d88d03d9509");
@@ -75,7 +79,7 @@ privateAuriginAfricaRequest.interceptors.response.use(
       }
       if (!decodedToken) {
         removeToken("tka-369340a21d88d03d9509");
-        router.push({ name: "Login" });
+        await router.push({ name: "Login" });
         return Promise.reject(error);
       }
       const refreshToken = tokenPayload.refreshToken;
@@ -89,9 +93,9 @@ privateAuriginAfricaRequest.interceptors.response.use(
         authStore.updateRefreshToken(res.data.refreshToken);
         setCookieToken(res.data as any);
         privateAuriginAfricaRequest.defaults.headers.common["Authorization"] =
-          "Bearer " + res.data.accessToken;
+          "JWT " + res.data.accessToken;
         originalRequest.headers["Authorization"] =
-          "Bearer " + res.data.accessToken;
+          "JWT " + res.data.accessToken;
         return privateAuriginAfricaRequest(originalRequest);
       }
     }

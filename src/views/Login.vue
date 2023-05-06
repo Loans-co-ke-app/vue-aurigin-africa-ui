@@ -46,13 +46,17 @@ const handleSubmit = async (e: Event) => {
       type: "error",
     });
   } else {
+    console.time("login");
+
     try {
       isLoading.value = true;
       const response = await publicAuriginAfricaRequest.post(
-        "/auth/login",
+        "/auth/login/",
         formData.value
       );
+
       const data = response.data;
+      console.log({ data });
       // setCookieToken(data.token);
       // authStore.loginUser({
       //   accessToken: data.token,
@@ -60,11 +64,21 @@ const handleSubmit = async (e: Event) => {
       //   authenticated: true,
       //   loading: false,
       // });
-      const { tokens, profile } = data;
-      setCookieToken(tokens);
+      // const { tokens, profile } = data;
+
+      const { email, username, tokens } = data;
+      // console.log();
+
+      // console.log({ email, username, tokens: JSON.parse(tokens) });
+      const { access, refresh } = JSON.parse(tokens);
+      setCookieToken({ accessToken: access, refreshToken: refresh });
       authStore.loginUser({
-        refreshToken: tokens.refreshToken,
-        user: profile,
+        refreshToken: refresh,
+        user: {
+          email,
+          username,
+          role: "user",
+        },
         authenticated: true,
         loading: false,
       });
@@ -81,14 +95,8 @@ const handleSubmit = async (e: Event) => {
       await router.push(redirect);
     } catch (error: any) {
       if (error instanceof AxiosError) {
-        const { errors } = error.response!.data as any;
-        let msg = "";
-        if (Array.isArray(errors)) {
-          errors.forEach((err: any) => {
-            msg += err !== "" ? err + " " : "";
-          });
-        }
-        toast.error(msg, {
+        const { detail } = error.response!.data as any;
+        toast.error(detail, {
           position: "top-right",
           duration: 5000,
           pauseOnHover: true,
@@ -97,6 +105,7 @@ const handleSubmit = async (e: Event) => {
       }
     } finally {
       isLoading.value = false;
+      console.timeEnd("login");
     }
   }
 };
@@ -167,13 +176,13 @@ const handleSubmit = async (e: Event) => {
                 </p>
               </div>
 
-              <div class="mb-3 flex flex-wrap content-center justify-end">
+              <!-- <div class="mb-3 flex flex-wrap content-center justify-end">
                 <router-link
                   :to="{ name: 'forgotPassword' }"
                   class="text-xs font-semibold text-primary-700"
                   >Forgot password?</router-link
                 >
-              </div>
+              </div> -->
 
               <div class="mb-3">
                 <button

@@ -3,6 +3,7 @@ import {
   SignUpFormPropType,
   AuthStateType,
   UserType,
+  AuthUser,
 } from "@/types";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
@@ -10,7 +11,7 @@ import { Router } from "vue-router";
 import { defineStore } from "pinia";
 import { stateKeys } from "@/constants/stateKeys";
 import { removeToken } from "@/api/cookieService";
-
+import router from "@/router";
 const initialState: AuthStateType = JSON.parse(
   localStorage.getItem(stateKeys["aurigin-afica-app-authState"])!
 )
@@ -22,7 +23,7 @@ const initialState: AuthStateType = JSON.parse(
       isAuthenticated: false,
     } as unknown as AuthStateType);
 
-export type AuthStateTypeTypeWithRouter = AuthStateType & {
+export type AuthStateTypeWithRouter = AuthStateType & {
   router: Router;
 };
 
@@ -70,8 +71,8 @@ export const useAuthStore = defineStore({
         JSON.stringify(this.$state)
       );
     },
-    updateUser(user: UserType) {
-      this.user = user;
+    updateUser(user: AuthUser) {
+      this.user = user
       localStorage.setItem(
         stateKeys["aurigin-afica-app-authState"],
         JSON.stringify(this.$state)
@@ -83,6 +84,7 @@ export const useAuthStore = defineStore({
       this.refreshToken = null;
       this.authenticated = false;
       localStorage.removeItem(stateKeys["aurigin-afica-app-authState"]);
+      await router.push({ name: "login" });
     },
   },
 });

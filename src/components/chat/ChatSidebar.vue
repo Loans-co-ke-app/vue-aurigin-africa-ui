@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "@/store/useAuthStore";
+const { authStateUser } = storeToRefs(useAuthStore());
+const store = useAuthStore();
 const { isOpen } = defineProps({
   isOpen: {
     type: Boolean,
@@ -24,7 +28,7 @@ const emit = defineEmits(["toggleSidebar"]);
     </button>
     <!-- Add your sidebar content here -->
     <div>
-        Mike Juma
+        {{ authStateUser?.username  }}
     </div>
   </div>
 </template>
